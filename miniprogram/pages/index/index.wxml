@@ -1,0 +1,61 @@
+<!--index.wxml-->
+<scroll-view class="scrollarea" scroll-y type="list">
+  <view class="container">
+    <view class="tab-bar">
+      <view class="tab-item {{currentTab === 0? 'active' : ''}}" data-index="0" bindtap="switchTab">封面</view>
+      <view class="tab-item {{currentTab === 1? 'active' : ''}}" data-index="1" bindtap="switchTab">多图</view>
+      <view class="tab-item {{currentTab === 2? 'active' : ''}}" data-index="2" bindtap="switchTab">Live图</view>
+      <view class="tab-item {{currentTab === 3? 'active' : ''}}" data-index="3" bindtap="switchTab">视频</view>
+      <view class="tab-item {{currentTab === 4? 'active' : ''}}" data-index="4" bindtap="switchTab">标题</view>
+    </view>
+    <view class="tab-content">
+      <!-- 这里根据不同的 tab 项展示对应的内容，比如使用 wx:if 进行判断 -->
+      <view wx:if="{{currentTab === 0}}">
+        <view>
+          <button bindtap="downloadImage" class="copy-button">下载到本地</button>
+        </view>
+        <image src="{{coverImageUrl}}" mode="widthFix" class="cover-image"></image>
+      </view>
+      <view wx:if="{{currentTab === 1}}">
+        <view>
+          <button bindtap="downloadMultiImage" class="copy-button">下载到本地</button>
+        </view>
+        <view class="container-list">
+          <button class="selectAll" bindtap="selectAllImage">全选</button>
+          <button class="unSelectAll" bindtap="unSelectAllImage">全不选</button>
+          <view wx:for="{{imageList}}" wx:key="index" class="image-item">
+            <checkbox data-index="{{index}}" bindtap="checkboxChange" checked="{{switch2Checked[index]}}"></checkbox>
+            <image src="{{item}}" mode="aspectFit" show-menu-by-longpress="{{ true }}" webp="{{ true }}" style="width: 349rpx; display: inline-block; box-sizing: border-box"></image>
+          </view>
+        </view>
+      </view>
+      <view wx:if="{{currentTab === 2}}">
+        <view>
+          <button bindtap="downloadMultiLive" class="copy-button">下载到本地</button>
+        </view>
+        <view class="container-list">
+          <button class="selectAll" bindtap="selectAllLive">全选</button>
+          <button class="unSelectAll" bindtap="unSelectAllLive">全不选</button>
+          <view wx:for="{{liveVideoUrls}}" wx:key="index" class="live-item">
+            <checkbox data-index="{{index}}" bindtap="liveCheckboxChange" checked="{{videoSwitch2Checked[index]}}"></checkbox>
+            <video src="{{item}}" controls style="width: 349rpx; display: inline-block; box-sizing: border-box;"></video>
+          </view>
+        </view>
+      </view>
+      <view wx:if="{{currentTab === 3}}">
+        <view>
+          <button bindtap="downloadMainVideo" class="copy-button">下载到本地</button>
+        </view>
+        <video src="{{mainVideoUrl}}" controls></video>
+      </view>
+      <view wx:if="{{currentTab === 4}}">
+        <view>
+          <button bindtap="copyText" class="copy-button">复制</button>
+        </view>
+        <view id="copyContent" class="title-content">
+          {{parseTitle}}
+        </view>
+      </view>
+    </view>
+  </view>
+</scroll-view>

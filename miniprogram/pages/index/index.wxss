@@ -1,0 +1,110 @@
+/**index.wxss**/
+page {
+  height: 14vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.scrollarea {
+  flex: 1;
+  overflow-y: visible;
+}
+
+.tab-bar {
+  display: flex;
+  justify-content: space-around;
+  background-color: #f5f5f5;
+  padding: 5px 0;
+}
+
+.tab-item {
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.active {
+  color: #14385f;
+  border-bottom: 2px solid #ff0000;
+}
+
+.tab-content {
+  padding: 0px;
+}
+
+.title-content {
+  padding: 10px 30px;
+}
+
+.copy-button {
+  margin-top: 5px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  /* 设置按钮字体大小为 12px，可按需调整 */
+  height: 35px;
+  /* 设置按钮高度为 30px，可按需调整 */
+  background-color: #5980aa;
+  /* 设置按钮背景颜色为蓝色，可按需修改 */
+  color: white;
+  /* 设置按钮文字颜色为白色，可按需修改 */
+}
+
+.cover-image {
+  margin-bottom: 40rpx;
+}
+
+.container-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  /* 使两列图片左右对齐 */
+}
+
+.image-item {
+  width: 50%;
+  /* 每列宽度接近 50%，留出一定间隙 */
+  margin-bottom: 30rpx;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.live-item {
+  width: 50%;
+  /* 每列宽度接近 50%，留出一定间隙 */
+  margin-bottom: 30rpx;
+  position: relative;
+  box-sizing: border-box;
+}
+
+checkbox {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.selectAll {
+  width: 40% !important;
+  float: left;
+  color: #497db6;
+  background-color: rgb(224, 243, 241);
+  margin-bottom: 10px;
+}
+
+.unSelectAll {
+  width: 40% !important;
+  float: right;
+  color: #497db6;
+  background-color: rgb(224, 243, 241);
+  margin-bottom: 10px;
+}
+
+.video-container {
+  width: 100%;
+  height: auto;
+  position: relative;
+}
+
+.video {
+  width: 100%;
+  height: auto;
+}
