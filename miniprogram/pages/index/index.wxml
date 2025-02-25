@@ -4,8 +4,8 @@
     <view class="tab-bar">
       <view class="tab-item {{currentTab === 0? 'active' : ''}}" data-index="0" bindtap="switchTab">封面</view>
       <view class="tab-item {{currentTab === 1? 'active' : ''}}" data-index="1" bindtap="switchTab">多图</view>
-      <view class="tab-item {{currentTab === 2? 'active' : ''}}" data-index="2" bindtap="switchTab">Live图</view>
-      <view class="tab-item {{currentTab === 3? 'active' : ''}}" data-index="3" bindtap="switchTab">视频</view>
+      <view hidden="{{hidden}}" class="tab-item {{currentTab === 2? 'active' : ''}}" data-index="2" bindtap="switchTab">Live图</view>
+      <view hidden="{{hidden}}" class="tab-item {{currentTab === 3? 'active' : ''}}" data-index="3" bindtap="switchTab">视频</view>
       <view class="tab-item {{currentTab === 4? 'active' : ''}}" data-index="4" bindtap="switchTab">标题</view>
     </view>
     <view class="tab-content">
@@ -38,7 +38,7 @@
           <button class="unSelectAll" bindtap="unSelectAllLive">全不选</button>
           <view wx:for="{{liveVideoUrls}}" wx:key="index" class="live-item">
             <checkbox data-index="{{index}}" bindtap="liveCheckboxChange" checked="{{videoSwitch2Checked[index]}}"></checkbox>
-            <video src="{{item}}" controls style="width: 349rpx; display: inline-block; box-sizing: border-box;"></video>
+            <video src="{{item}}" custom-cache="{{false}}" controls style="width: 349rpx; display: inline-block; box-sizing: border-box;"></video>
           </view>
         </view>
       </view>
@@ -46,7 +46,7 @@
         <view>
           <button bindtap="downloadMainVideo" class="copy-button">下载到本地</button>
         </view>
-        <video src="{{mainVideoUrl}}" controls></video>
+        <video src="{{mainVideoUrl}}" custom-cache="{{false}}" controls></video>
       </view>
       <view wx:if="{{currentTab === 4}}">
         <view>

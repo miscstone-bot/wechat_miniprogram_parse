@@ -1,14 +1,8 @@
 // index.ts
 // 获取应用实例
-const app = getApp<IAppOption>()
+const app = getApp()
 
 Component({
-  properties: {
-    id: {
-      type: String,
-      value: "1",
-    } 
-  },
   data: {
     currentTab: 0,
     parseTitle: "",
@@ -18,40 +12,41 @@ Component({
     mainVideoUrl: "",
     liveVideoUrls: [] as string[],
     videoSwitch2Checked: [] as boolean[],
+    hidden: 1,
   },
   lifetimes: {
     attached() {
-        this.fetchData();
+      this.fetchData();
     }
-},
+  },
+  
   methods: {
     fetchData() {
-      console.log('fetch from index: '+this.properties.id)
+      console.log('fetch from index: ' + app.globalData.indexOptionID)
       wx.request({
-        url: 'http://127.0.0.1:3000/api/v2/wechat_bot/query?id='+this.properties.id,
+        url: 'https://332974rbtf31.vicp.fun/api/v2/wechat_bot/query?id=' + app.globalData.indexOptionID ,
         method: 'GET',
         success: (res: WechatMiniprogram.RequestSuccessCallbackResult) => {
           console.log(res)
-
-            if (res.statusCode === 200) {
-                this.setData({
-                  currentTab: 2,
-                  parseTitle: res.data.title,
-                  coverImageUrl: res.data.cover_url,
-                  imageList: res.data.images,
-                  switch2Checked: [] as boolean[],
-                  mainVideoUrl: res.data.video_url,
-                  liveVideoUrls: res.data.live_images_url,
-                  videoSwitch2Checked: [] as boolean[],
-                });
-            } else {
-                console.error('请求失败，状态码：', res.statusCode);
-            }
+          if (res.statusCode === 200) {
+            this.setData({
+              parseTitle: res.data.title,
+              coverImageUrl: res.data.cover_url,
+              imageList: res.data.images,
+              switch2Checked: [] as boolean[],
+              mainVideoUrl: res.data.video_url,
+              liveVideoUrls: res.data.live_images_url,
+              videoSwitch2Checked: [] as boolean[],
+              hidden: res.data.is_release,
+            });
+          } else {
+            console.error('请求失败，状态码：', res.statusCode);
+          }
         },
         fail: (err: WechatMiniprogram.GeneralCallbackResult) => {
-            console.error('请求出错：', err);
+          console.error('请求出错：', err);
         }
-    });
+      });
     },
     switchTab(e: any) {
       const tabIndex = parseInt(e.currentTarget.dataset.index);
@@ -281,12 +276,11 @@ Component({
           console.log("skip download")
           return
         }
-
         wx.downloadFile({
           url: videoUrl,
           success: (res) => {
             if (res.statusCode === 200) {
-              wx.saveImageToPhotosAlbum({
+              wx.saveVideoToPhotosAlbum({
                 filePath: res.tempFilePath,
               });
             }

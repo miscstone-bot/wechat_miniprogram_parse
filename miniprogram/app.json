@@ -5,7 +5,7 @@
   ],
   "window": {
     "navigationBarTextStyle": "black",
-    "navigationBarTitleText": "解析结果",
+    "navigationBarTitleText": "图文解析结果",
     "navigationBarBackgroundColor": "#ffffff"
   },
   "style": "v2",
