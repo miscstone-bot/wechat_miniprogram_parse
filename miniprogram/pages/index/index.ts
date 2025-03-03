@@ -13,14 +13,26 @@ Component({
     liveVideoUrls: [] as string[],
     videoSwitch2Checked: [] as boolean[],
     hidden: 1,
+    indexOptionID: 0,
   },
   lifetimes: {
     attached() {
+      this.onLoad();
       this.fetchData();
     }
   },
   
   methods: {
+    onLoad(options) {
+      if (options !== undefined && options.id!== undefined) {
+        const id = options.id;
+        console.log('获取到的 id 是:', id);
+        app.globalData.indexOptionID=id
+        // 在这里可以进行后续的业务逻辑处理，比如根据 id 去请求数据等
+      } else {
+        console.log('未获取到有效的 id 参数');
+      }
+    },
     fetchData() {
       console.log('fetch from index: ' + app.globalData.indexOptionID)
       wx.request({
