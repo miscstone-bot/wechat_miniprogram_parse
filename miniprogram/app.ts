@@ -1,7 +1,6 @@
 // app.ts
 App({
   globalData: {
-    indexOptionID: ''
   },
   onLaunch(options) {
     // 展示本地存储能力
