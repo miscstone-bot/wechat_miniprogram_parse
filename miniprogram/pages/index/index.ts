@@ -19,6 +19,32 @@ Component({
     attached() {
       this.onLoad();
       this.fetchData();
+      const intervalId = setInterval(() => {
+        const fixIndexID = app.globalData.indexOptionID
+        const pages = getCurrentPages();
+        const currentPage = pages[pages.length - 1];
+        const options = currentPage.options;
+        const newUniqueID = options.id || '';
+        console.log("compare start")
+        console.log(newUniqueID,fixIndexID)
+        console.log("compare end")
+
+        if (newUniqueID!==fixIndexID) {
+          app.globalData.indexOptionID=newUniqueID
+          console.log('获取到的app index是:', app.globalData.indexOptionID)
+          this.fetchData();
+          // 清除定时器，避免重复创建
+          clearInterval(intervalId);
+          // 获取当前页面路径
+          const currentPagePath = currentPage.route;
+          // 执行页面刷新逻辑，重新加载页面并传递新的 uniqueID 参数
+          console.log(`/${currentPagePath}?id=${app.globalData.indexOptionID}`)
+          wx.navigateTo({
+              url: `/${currentPagePath}?id=${app.globalData.indexOptionID}`
+          });
+        }
+        console.log("=====")
+      },4000)
     }
   },
   
@@ -29,6 +55,7 @@ Component({
         console.log('获取到的 id 是:', id);
         app.globalData.indexOptionID=id
         // 在这里可以进行后续的业务逻辑处理，比如根据 id 去请求数据等
+        console.log('获取到的app index是:', app.globalData.indexOptionID)
       } else {
         console.log('未获取到有效的 id 参数');
       }

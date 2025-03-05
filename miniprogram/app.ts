@@ -8,7 +8,6 @@ App({
     const logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
-    this.globalData.indexOptionID = options.query.id
 
     // 登录
     wx.login({
