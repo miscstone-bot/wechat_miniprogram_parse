@@ -32,7 +32,7 @@ Component({
     fetchData(id: String) {
       console.log('fetch from index: ' + id)
       wx.request({
-        url: 'https://332974rbtf31.vicp.fun/api/v2/wechat_bot/query?id=' + id,
+        url: 'https://miscstone.iepose.cn/api/v2/wechat_bot/query?id=' + id,
         method: 'GET',
         success: (res: WechatMiniprogram.RequestSuccessCallbackResult) => {
           console.log(res)
